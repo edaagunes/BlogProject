@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SensiveProject.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using SensiveProject.DataAccessLayer.Context;
 namespace SensiveProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SensiveContext))]
-    partial class SensiveContextModelSnapshot : ModelSnapshot
+    [Migration("20241101110835_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -298,9 +300,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -312,8 +311,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("CommentId");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("Comments");
                 });
@@ -450,22 +447,9 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Comment", b =>
-                {
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.AppUser", "AppUser")
-                        .WithMany("Comments")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.AppUser", b =>
                 {
                     b.Navigation("Articles");
-
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Category", b =>

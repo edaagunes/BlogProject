@@ -27,21 +27,28 @@ namespace SensiveProject.DataAccessLayer.Repositories
         public List<T> GetAll()
         {
             return _context.Set<T>().ToList();
-        }
+			
 
-        public T GetById(int id)
+		}
+
+		public T GetById(int id)
         {
-            return _context.Set<T>().Find(id);
-        }
+            return _context.Set<T>().Find(id);	
 
-        public void Insert(T entity)
+		}
+
+		public void Insert(T entity)
         {
             _context.Set<T>().Add(entity);
-        }
+			_context.SaveChanges();
 
-        public void Update(T entity)
+		}
+
+		public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
-        }
-    }
+			_context.SaveChanges();
+
+		}
+	}
 }

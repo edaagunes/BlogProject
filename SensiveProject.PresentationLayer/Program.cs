@@ -1,4 +1,8 @@
+using SensiveProject.BusinessLayer.Abstract;
+using SensiveProject.BusinessLayer.Concrete;
+using SensiveProject.DataAccessLayer.Abstract;
 using SensiveProject.DataAccessLayer.Context;
+using SensiveProject.DataAccessLayer.EntityFramework;
 using SensiveProject.EntityLayer.Concrete;
 using SensiveProject.PresentationLayer.Models;
 using System.Security.Principal;
@@ -15,6 +19,26 @@ builder.Services.AddDbContext<SensiveContext>();
 // Identity kütüphanesini kullanmamýza izin verir. DI kullanacaðýmýzý bildirdik.
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SensiveContext>().AddErrorDescriber<CustomIdentityValidator>();
+
+builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
+builder.Services.AddScoped<IArticleDal,EfArticleDal>();
+builder.Services.AddScoped<IArticleService,ArticleManager>();
+
+builder.Services.AddScoped<ICommentDal,EfCommentDal>();
+builder.Services.AddScoped<ICommentService,CommentManager>();
+
+builder.Services.AddScoped<IContactDal,EfContactDal>();
+builder.Services.AddScoped<IContactService,ContactManager>();
+
+builder.Services.AddScoped<INewsletterDal, EfNewsletterDal>();
+builder.Services.AddScoped<INewsletterService, NewsletterManager>();
+
+builder.Services.AddScoped<ITagCloudDal, EfTagCloudDal>();
+builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

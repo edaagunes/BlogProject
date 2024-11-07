@@ -1,4 +1,5 @@
 ﻿using SensiveProject.BusinessLayer.Abstract;
+using SensiveProject.DataAccessLayer.Abstract;
 using SensiveProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,13 @@ namespace SensiveProject.BusinessLayer.Concrete
 {
 	public class AppUserManager : IAppUserService
 	{
-		// dal yok
+		private readonly IAppUserDal _appUserDal;
+
+		public AppUserManager(IAppUserDal appUserDal)
+		{
+			_appUserDal = appUserDal;
+		}
+
 		public void TDelete(int id)
 		{
 			throw new NotImplementedException();
@@ -18,7 +25,7 @@ namespace SensiveProject.BusinessLayer.Concrete
 
 		public List<AppUser> TGetAll()
 		{
-			throw new NotImplementedException();
+			return _appUserDal.GetAll();
 		}
 
 		public AppUser TGetById(int id)

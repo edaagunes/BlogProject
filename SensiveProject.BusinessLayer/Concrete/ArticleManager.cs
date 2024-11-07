@@ -1,5 +1,6 @@
 ﻿using SensiveProject.BusinessLayer.Abstract;
 using SensiveProject.DataAccessLayer.Abstract;
+using SensiveProject.DataAccessLayer.Context;
 using SensiveProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,17 @@ namespace SensiveProject.BusinessLayer.Concrete
 			_articleDal = articleDal;
 		}
 
-		public void TDelete(int id)
+        public List<Article> TArticleListWithCategory()
+        {
+           return _articleDal.ArticleListWithCategory();
+        }
+
+        public List<Article> TArticleListWithCategoryAndAppUser()
+        {
+            return _articleDal.ArticleListWithCategoryAndAppUser();
+        }
+
+        public void TDelete(int id)
 		{
 			_articleDal.Delete(id);
 		}

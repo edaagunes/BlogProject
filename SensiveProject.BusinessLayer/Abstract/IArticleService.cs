@@ -9,5 +9,7 @@ namespace SensiveProject.BusinessLayer.Abstract
 {
 	public interface IArticleService : IGenericService<Article>
 	{
-	}
+        List<Article> TArticleListWithCategory();
+        List<Article> TArticleListWithCategoryAndAppUser();
+    }
 }

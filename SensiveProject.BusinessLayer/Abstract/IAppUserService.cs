@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SensiveProject.BusinessLayer.Abstract
 {
-	public interface IAppUserService:IGenericService<AppUser>
+	public interface IAppUserService : IGenericService<AppUser>
 	{
 	}
 }

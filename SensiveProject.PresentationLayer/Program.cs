@@ -38,6 +38,8 @@ builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 builder.Services.AddScoped<ITagCloudDal, EfTagCloudDal>();
 builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
 
+builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+builder.Services.AddScoped<IAppUserService, AppUserManager>();
 
 builder.Services.AddControllersWithViews();
 

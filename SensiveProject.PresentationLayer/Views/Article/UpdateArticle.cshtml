@@ -1,12 +1,14 @@
 ﻿@model Article
 @{
-	Layout = null;
+    Layout = null;
 }
+
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <div class="Container">
 	<br />
 	<form method="post">
+		<input type="hidden" asp-for="ArticleId"/>
 		<label>Makale Başlığı</label>
 		<input type="text" asp-for="Title" class="form-control" />
 		<br />
@@ -22,6 +24,7 @@
 		<label>Kullanıcı</label>
 		@Html.DropDownListFor(x => x.AppUserId, (List<SelectListItem>)ViewBag.v2, new { @class = "form-control" })
 		<br />
-		<button class="btn btn-info">Makaleyi Ekle</button>
+		<button class="btn btn-info">Makaleyi Güncelle</button>
 	</form>
 </div>
+

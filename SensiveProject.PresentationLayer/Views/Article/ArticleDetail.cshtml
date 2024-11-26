@@ -1,6 +1,5 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+	Layout = null;
 }
 
 <!DOCTYPE html>
@@ -10,30 +9,17 @@
 
 <body>
 
-    <div class="container">
+	<div class="container">
 
-        @await Component.InvokeAsync("_ArticleDetailListComponentPartial")
-        
-        <!-- Yorumlar -->
-        <div class="comments">
-            <h2>Yorumlar</h2>
-            <div class="comment">
-                <p class="comment-author">Jane Doe</p>
-                <p>Harika bir yazı! Çok bilgilendirici olmuş.</p>
-            </div>
-            <div class="comment">
-                <p class="comment-author">Michael Smith</p>
-                <p>Detaylara hayran kaldım. Teşekkürler!</p>
-            </div>
-        </div>
+		@await Component.InvokeAsync("_ArticleDetailListComponentPartial", new { id = ViewBag.i })
 
-        <!-- Yeni Yorum Yapma -->
-        <div class="new-comment">
-            <h2>Yeni Yorum Yap</h2>
-            <textarea placeholder="Yorumunuzu buraya yazın..."></textarea>
-            <button class="btn">Gönder</button>
-        </div>
-    </div>
+		<!-- Yorumlar -->
+		@await Component.InvokeAsync("_ArticleDetailCommentListComponentPartial", new { id = ViewBag.i })
+
+		@await Html.PartialAsync("~/Views/Comment/AddComment.cshtml", new { id = ViewBag.i })
+
+
+	</div>
 
 </body>
 </html>

@@ -1,6 +1,5 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+	Layout = null;
 }
 
 <!DOCTYPE html>
@@ -10,14 +9,14 @@
 
 
 <body>
-    <div class="main-container">
-        <!-- Blog Listesi -->
-        @await Component.InvokeAsync("_ArticleListComponentPartial")
-       
-        <!-- Kategori Listesi -->
-        @await Component.InvokeAsync("_CategoryListComponentPartial")
+	<div class="main-container">
+		<!-- Blog Listesi -->
+		@await Component.InvokeAsync("_ArticleListComponentPartial")
 
-       
-    </div>
+		<!-- Kategori Listesi -->
+		@await Component.InvokeAsync("_CategoryListComponentPartial")
+
+
+	</div>
 </body>
 </html>

@@ -12,12 +12,14 @@ namespace SensiveProject.PresentationLayer.Controllers
 		private readonly IArticleService _articleService;
 		private readonly ICategoryService _categoryService;
 		private readonly IAppUserService _appUserService;
+		private readonly ICommentService _commentService;
 
-		public ArticleController(IArticleService articleService, ICategoryService categoryService, IAppUserService appUserService)
+		public ArticleController(IArticleService articleService, ICategoryService categoryService, IAppUserService appUserService, ICommentService commentService)
 		{
 			_articleService = articleService;
 			_categoryService = categoryService;
 			_appUserService = appUserService;
+			_commentService = commentService;
 		}
 
 		public IActionResult ArticleList()
@@ -108,9 +110,19 @@ namespace SensiveProject.PresentationLayer.Controllers
 
 		public IActionResult ArticleDetail(int id)
 		{
+			ViewBag.i = id;
 			var value=_articleService.TGetById(id);
 			return View(value);
-
 		}
+
+		//[HttpPost]
+		//public IActionResult ArticleDetail(Comment comment)
+		//{
+		//	comment.CreatedDate = DateTime.Now;
+		//	comment.ArticleId = 0;
+		//	comment.AppUserId = 0;
+
+		//	return RedirectToAction("ArticleList","Default");
+		//}
 	}
 }

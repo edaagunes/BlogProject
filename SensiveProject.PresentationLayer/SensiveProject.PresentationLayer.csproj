@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\sensive-master\img\blog\.DS_Store" />
+    <None Include="wwwroot\sensive-master\img\gallery\.DS_Store" />
+    <None Include="wwwroot\sensive-master\img\instagram\.DS_Store" />
+    <None Include="wwwroot\sensive-master\vendors\linericon\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.35">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

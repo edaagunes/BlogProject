@@ -32,6 +32,10 @@ builder.Services.AddScoped<ICommentService,CommentManager>();
 builder.Services.AddScoped<IContactDal,EfContactDal>();
 builder.Services.AddScoped<IContactService,ContactManager>();
 
+builder.Services.AddScoped<IContactInfoDal, EfContactInfoDal>();
+builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
+
+
 builder.Services.AddScoped<INewsletterDal, EfNewsletterDal>();
 builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 
@@ -51,6 +55,8 @@ if (!app.Environment.IsDevelopment())
 	app.UseExceptionHandler("/Home/Error");
 	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
+
+	builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 }
 
 app.UseHttpsRedirection();

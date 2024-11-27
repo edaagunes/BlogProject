@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace SensiveProject.BusinessLayer.Concrete
 {
-	public class ContactManager : IContactService
+	public class ContactInfoManager : IContactInfoService
 	{
-		private readonly IContactDal _contactDal;
+		private readonly IContactInfoDal _contactInfoDal;
 
-		public ContactManager(IContactDal contactDal)
+		public ContactInfoManager(IContactInfoDal contactInfoDal)
 		{
-			_contactDal = contactDal;
+			_contactInfoDal = contactInfoDal;
 		}
 
 		public void TDelete(int id)
@@ -23,22 +23,22 @@ namespace SensiveProject.BusinessLayer.Concrete
 			throw new NotImplementedException();
 		}
 
-		public List<Contact> TGetAll()
+		public List<ContactInfo> TGetAll()
+		{
+			return _contactInfoDal.GetAll();
+		}
+
+		public ContactInfo TGetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Contact TGetById(int id)
+		public void TInsert(ContactInfo entity)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void TInsert(Contact entity)
-		{
-			_contactDal.Insert(entity);
-		}
-
-		public void TUpdate(Contact entity)
+		public void TUpdate(ContactInfo entity)
 		{
 			throw new NotImplementedException();
 		}

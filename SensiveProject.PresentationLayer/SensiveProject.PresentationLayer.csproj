@@ -30,4 +30,8 @@
     <ProjectReference Include="..\SensiveProject.BusinessLayer\SensiveProject.BusinessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Author\Data\" />
+  </ItemGroup>
+
 </Project>

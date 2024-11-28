@@ -39,6 +39,11 @@ namespace SensiveProject.BusinessLayer.Concrete
 			return _articleDal.GetAll();
 		}
 
+		public List<Article> TGetArticlesByAppUserId(int id)
+		{
+			return _articleDal.GetArticlesByAppUserId(id);
+		}
+
 		public Article TGetById(int id)
 		{
 			return _articleDal.GetById(id);

@@ -32,6 +32,13 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
             return values;
         }
 
+		public List<Article> GetArticlesByAppUserId(int id)
+		{
+			var context = new SensiveContext();
+            var values=context.Articles.Where(x=>x.AppUserId==id).ToList();
+            return values;
+		}
+
 		public Article GetLastArticle()
 		{
 			var context = new SensiveContext();

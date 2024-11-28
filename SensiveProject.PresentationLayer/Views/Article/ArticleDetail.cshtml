@@ -15,8 +15,8 @@
 
 		<!-- Yorumlar -->
 		@await Component.InvokeAsync("_ArticleDetailCommentListComponentPartial", new { id = ViewBag.i })
-
-		@await Html.PartialAsync("~/Views/Comment/AddComment.cshtml", new { id = ViewBag.i })
+@* 
+		@await Html.PartialAsync("~/Views/Comment/AddComment.cshtml") *@
 
 
 	</div>

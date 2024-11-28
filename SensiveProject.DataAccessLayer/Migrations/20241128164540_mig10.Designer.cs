@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SensiveProject.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using SensiveProject.DataAccessLayer.Context;
 namespace SensiveProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SensiveContext))]
-    partial class SensiveContextModelSnapshot : ModelSnapshot
+    [Migration("20241128164540_mig10")]
+    partial class mig10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,21 +37,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.HasIndex("CategoriesCategoryId");
 
                     b.ToTable("AppUserCategory");
-                });
-
-            modelBuilder.Entity("ArticleTagCloud", b =>
-                {
-                    b.Property<int>("ArticlesArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsTagCloudId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ArticlesArticleId", "TagsTagCloudId");
-
-                    b.HasIndex("TagsTagCloudId");
-
-                    b.ToTable("ArticleTagCloud");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -290,6 +277,10 @@ namespace SensiveProject.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Tag")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -301,29 +292,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.ArticleTagCloud", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagCloudId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("TagCloudId");
-
-                    b.ToTable("ArticleTagClouds");
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Category", b =>
@@ -490,21 +458,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ArticleTagCloud", b =>
-                {
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.Article", null)
-                        .WithMany()
-                        .HasForeignKey("ArticlesArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.TagCloud", null)
-                        .WithMany()
-                        .HasForeignKey("TagsTagCloudId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("SensiveProject.EntityLayer.Concrete.AppRole", null)
@@ -573,25 +526,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.ArticleTagCloud", b =>
-                {
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.TagCloud", "TagCloud")
-                        .WithMany()
-                        .HasForeignKey("TagCloudId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("TagCloud");
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Comment", b =>

@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SensiveProject.BusinessLayer.Abstract;
 
-using PagedList.Core;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Linq;
-
 
 namespace SensiveProject.PresentationLayer.Controllers
 {

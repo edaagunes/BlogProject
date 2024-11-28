@@ -10,5 +10,7 @@ namespace SensiveProject.EntityLayer.Concrete
     {
         public int TagCloudId { get; set; }
         public string Title { get; set; }
+
+        public List<Article>Articles { get; set; }
     }
 }

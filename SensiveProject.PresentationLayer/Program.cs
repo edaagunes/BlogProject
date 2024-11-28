@@ -45,6 +45,9 @@ builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
 builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
 builder.Services.AddScoped<IAppUserService, AppUserManager>();
 
+builder.Services.AddScoped<IArticleTagCloudDal, EfArticleTagCloudDal>();
+builder.Services.AddScoped<IArticleTagCloudService, ArticleTagCloudManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

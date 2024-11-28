@@ -22,5 +22,9 @@ namespace SensiveProject.DataAccessLayer.Context
         public DbSet<NewsLetter> NewsLetters { get; set; }
         public DbSet<TagCloud> TagClouds { get; set; }
         public DbSet<ContactInfo> ContactInfos { get; set; }
-    }
+
+		public DbSet<ArticleTagCloud> ArticleTagClouds {  get; set; }
+
+	
+	}
 }

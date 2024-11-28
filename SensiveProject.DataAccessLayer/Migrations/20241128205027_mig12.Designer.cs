@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SensiveProject.DataAccessLayer.Context;
 
@@ -11,9 +12,10 @@ using SensiveProject.DataAccessLayer.Context;
 namespace SensiveProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SensiveContext))]
-    partial class SensiveContextModelSnapshot : ModelSnapshot
+    [Migration("20241128205027_mig12")]
+    partial class mig12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,29 +305,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.ArticleTagCloud", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagCloudId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("TagCloudId");
-
-                    b.ToTable("ArticleTagClouds");
-                });
-
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -573,25 +552,6 @@ namespace SensiveProject.DataAccessLayer.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.ArticleTagCloud", b =>
-                {
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.Article", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SensiveProject.EntityLayer.Concrete.TagCloud", "TagCloud")
-                        .WithMany()
-                        .HasForeignKey("TagCloudId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("TagCloud");
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Comment", b =>

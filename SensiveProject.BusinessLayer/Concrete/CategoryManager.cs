@@ -33,6 +33,11 @@ namespace SensiveProject.BusinessLayer.Concrete
 			return _categoryDal.GetById(id);
 		}
 
+		public List<Category> TGetCategoryWithArticle()
+		{
+			return _categoryDal.GetCategoryWithArticle();
+		}
+
 		public void TInsert(Category entity)
 		{
 			if (entity.CategoryName.Length >= 5 && entity.CategoryName.Length <= 50)

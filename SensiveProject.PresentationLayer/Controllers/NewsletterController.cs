@@ -19,11 +19,11 @@ namespace SensiveProject.PresentationLayer.Controllers
 			return PartialView();
 		}
 		[HttpPost]
-		public IActionResult Subscribe(NewsLetter newsLetter)
+		public JsonResult Subscribe(NewsLetter newsLetter)
 		{
 			_newsletterService.TInsert(newsLetter);
-			// burada gittigi sayfa degisecek
-			return RedirectToAction("Index","Contact");
+			// burada gittigi sayfa degisecek her seferinde
+			return Json(new { success = true, message = "Başarıyla abone oldunuz." });
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
         public List<Article> ArticleListWithCategoryAndAppUser()
         {
             var context=new SensiveContext();
-            var values=context.Articles.Include(x=>x.Category).Include(y=>y.AppUser).ToList();
+            var values=context.Articles.Include(x=>x.Category).Include(y=>y.AppUser).Include(z=>z.Comments).ToList();
             return values;
         }
 

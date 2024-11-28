@@ -1,4 +1,5 @@
-﻿using SensiveProject.DataAccessLayer.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using SensiveProject.DataAccessLayer.Abstract;
 using SensiveProject.DataAccessLayer.Context;
 using SensiveProject.DataAccessLayer.Repositories;
 using SensiveProject.EntityLayer.Concrete;
@@ -14,6 +15,13 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
 	{
 		public EfCategoryDal(SensiveContext context) : base(context)
 		{
+		}
+
+		public List<Category> GetCategoryWithArticle()
+		{
+			using var context = new SensiveContext();
+			var values = context.Categories.Include(y => y.Articles).ToList();
+			return values;
 		}
 	}
 }

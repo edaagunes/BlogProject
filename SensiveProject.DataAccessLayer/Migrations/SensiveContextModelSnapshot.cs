@@ -270,7 +270,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Category", b =>
@@ -287,7 +287,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Comment", b =>
@@ -320,7 +320,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasIndex("ArticleId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.Contact", b =>
@@ -348,7 +348,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasKey("ContactId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.ContactInfo", b =>
@@ -385,7 +385,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasKey("ContactInfoId");
 
-                    b.ToTable("ContactInfos");
+                    b.ToTable("ContactInfos", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.NewsLetter", b =>
@@ -402,7 +402,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasKey("NewsLetterId");
 
-                    b.ToTable("NewsLetters");
+                    b.ToTable("NewsLetters", (string)null);
                 });
 
             modelBuilder.Entity("SensiveProject.EntityLayer.Concrete.TagCloud", b =>
@@ -419,7 +419,7 @@ namespace SensiveProject.DataAccessLayer.Migrations
 
                     b.HasKey("TagCloudId");
 
-                    b.ToTable("TagClouds");
+                    b.ToTable("TagClouds", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

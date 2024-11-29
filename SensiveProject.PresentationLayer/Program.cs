@@ -1,5 +1,7 @@
+using FluentValidation.AspNetCore;
 using SensiveProject.BusinessLayer.Abstract;
 using SensiveProject.BusinessLayer.Concrete;
+using SensiveProject.BusinessLayer.Container;
 using SensiveProject.DataAccessLayer.Abstract;
 using SensiveProject.DataAccessLayer.Context;
 using SensiveProject.DataAccessLayer.EntityFramework;
@@ -8,6 +10,7 @@ using SensiveProject.PresentationLayer.Models;
 using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 
 
@@ -20,33 +23,36 @@ builder.Services.AddDbContext<SensiveContext>();
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SensiveContext>().AddErrorDescriber<CustomIdentityValidator>();
 
-builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
-builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddControllersWithViews().AddFluentValidation();
+builder.Services.ContainerDependencies();
 
-builder.Services.AddScoped<IArticleDal,EfArticleDal>();
-builder.Services.AddScoped<IArticleService,ArticleManager>();
+//builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
+//builder.Services.AddScoped<ICategoryService, CategoryManager>();
 
-builder.Services.AddScoped<ICommentDal,EfCommentDal>();
-builder.Services.AddScoped<ICommentService,CommentManager>();
+//builder.Services.AddScoped<IArticleDal,EfArticleDal>();
+//builder.Services.AddScoped<IArticleService,ArticleManager>();
 
-builder.Services.AddScoped<IContactDal,EfContactDal>();
-builder.Services.AddScoped<IContactService,ContactManager>();
+//builder.Services.AddScoped<ICommentDal,EfCommentDal>();
+//builder.Services.AddScoped<ICommentService,CommentManager>();
 
-builder.Services.AddScoped<IContactInfoDal, EfContactInfoDal>();
-builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
+//builder.Services.AddScoped<IContactDal,EfContactDal>();
+//builder.Services.AddScoped<IContactService,ContactManager>();
+
+//builder.Services.AddScoped<IContactInfoDal, EfContactInfoDal>();
+//builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
 
 
-builder.Services.AddScoped<INewsletterDal, EfNewsletterDal>();
-builder.Services.AddScoped<INewsletterService, NewsletterManager>();
+//builder.Services.AddScoped<INewsletterDal, EfNewsletterDal>();
+//builder.Services.AddScoped<INewsletterService, NewsletterManager>();
 
-builder.Services.AddScoped<ITagCloudDal, EfTagCloudDal>();
-builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
+//builder.Services.AddScoped<ITagCloudDal, EfTagCloudDal>();
+//builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
 
-builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
-builder.Services.AddScoped<IAppUserService, AppUserManager>();
+//builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
+//builder.Services.AddScoped<IAppUserService, AppUserManager>();
 
-builder.Services.AddScoped<IArticleTagCloudDal, EfArticleTagCloudDal>();
-builder.Services.AddScoped<IArticleTagCloudService, ArticleTagCloudManager>();
+//builder.Services.AddScoped<IArticleTagCloudDal, EfArticleTagCloudDal>();
+//builder.Services.AddScoped<IArticleTagCloudService, ArticleTagCloudManager>();
 
 builder.Services.AddControllersWithViews();
 

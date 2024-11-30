@@ -19,6 +19,6 @@ namespace SensiveProject.EntityLayer.Concrete
 		public int AppUserId { get; set; }
 		public AppUser AppUser { get; set; }
 		public List<Comment> Comments { get; set; }
-
+		public List<ArticleTagCloud> ArticleTagClouds { get; set; }
 	}
 }

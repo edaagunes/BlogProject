@@ -13,5 +13,6 @@ namespace SensiveProject.DataAccessLayer.Abstract
         List<Article> ArticleListWithCategoryAndAppUser();
         Article GetLastArticle();
         List<Article> GetArticlesByAppUserId(int id);
+      
     }
 }

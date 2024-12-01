@@ -1,15 +1,13 @@
-﻿@model List<Article>
-
-
+﻿ @model List<Article>
+ 
 <section>
-    <div class="container">
+    <div class="container">      
         <div class="owl-carousel owl-theme blog-slider">
-
             @foreach (var item in Model)
             {
                 <div class="card blog__slide text-center">
                     <div class="blog__slide__img">
-                        <img class="card-img rounded-0" src="@item.CoverImageUrl" alt="">
+                        <img class="card-img rounded-0" src="@item.CoverImageUrl" style="width:360px; height:236px" alt="">
                     </div>
                     <div class="blog__slide__content">
                         <a class="blog__slide__label" href="/DefaultArticle/ArticleDetail/@item.ArticleId">@item.Category.CategoryName</a>
@@ -18,21 +16,8 @@
                     </div>
                 </div>
             }
-        </div>
-    </div>
+        </div>        
+        </div> 
 </section>
+ 
 
-<script>
-window.onload = function() {
-    var leftArrow = document.querySelector('.blog-slider__leftArrow');
-    var rightArrow = document.querySelector('.blog-slider__rightArrow');
-
-    if (leftArrow) {
-        leftArrow.style.backgroundImage = "url('/sensive-master/img/home/left-arrow.png')";
-    }
-
-    if (rightArrow) {
-            rightArrow.style.backgroundImage = "url('/sensive-master/img/home/right-arrow.png')";
-    }
-}
-</script>

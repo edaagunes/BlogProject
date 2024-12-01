@@ -17,13 +17,26 @@ namespace SensiveProject.PresentationLayer.Controllers
 			_tagCloudService = tagCloudService;
 		}
 
-		public IActionResult HomePage()
+		public IActionResult HomePage(int page = 1, int pageSize = 6)
 		{
-			var values = _articleService.TArticleListWithCategoryAndAppUser().ToList();
+			// Banner için özel başlık ve alt başlık
+			ViewBag.BannerTitle = "Hoşgeldiniz!";
+			ViewBag.BannerSubtitle = "Bloglarımızın Keyfini Çıkarın";
+
+			var values = _articleService.TArticleListWithCategoryAndAppUser()
+								.ToList()
+								.Skip((page - 1) * pageSize)
+								.Take(pageSize)
+								.ToList();
+
 			foreach (var article in values)
 			{
 				article.Tags = article.ArticleTagClouds.Select(at => at.TagCloud).ToList(); // Etiketleri modelde bağla
 			}
+
+			ViewBag.CurrentPage = page; 
+			ViewBag.TotalPages = (int)Math.Ceiling((double)_articleService.TArticleListWithCategoryAndAppUser().Count() / pageSize);
+
 			return View(values);
 		}
 

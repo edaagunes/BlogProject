@@ -76,16 +76,5 @@ namespace SensiveProject.PresentationLayer.Controllers
 			return View(currentArticle);
 		}
 
-		//[HttpGet]
-		//public IActionResult AddComment(int id)
-		//{
-		//	return View();
-		//}
-
-		//[HttpPost]
-		//public IActionResult AddComment(Comment comment)
-		//{
-		//	return RedirectToAction("ArticleDetail");
-		//}
 	}
 }

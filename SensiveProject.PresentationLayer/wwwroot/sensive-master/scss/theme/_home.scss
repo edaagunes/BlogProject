@@ -35,11 +35,7 @@
         position: absolute;
         top: 22%;
         left: -12px;
-        background-image: url('/sensive-master/img/home/left-arrow.png'); /* Burada resmin yolunu belirleyin */
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 40px; /* Resmin boyutunu ayarlayýn */
-        height: 40px; /* Resmin boyutunu ayarlayýn */
+    
 
         @media(min-width: 1250px) {
             left: -105px;
@@ -83,12 +79,7 @@
         position: absolute;
         top: 22%;
         right: -12px;
-        background-image: url('/sensive-master/img/home/right-arrow.png'); /* Burada resmin yolunu belirleyin */
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 40px; /* Resmin boyutunu ayarlayýn */
-        height: 40px; /* Resmin boyutunu ayarlayýn */
-
+       
         @media(min-width: 1250px) {
             right: -105px;
             padding: 0 25px 3px 20px;

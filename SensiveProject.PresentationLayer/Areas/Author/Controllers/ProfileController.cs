@@ -6,6 +6,7 @@ using SensiveProject.PresentationLayer.Areas.Author.Models;
 namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 {
 	[Area("Author")]
+	[Route("Author/[controller]/[action]/{id?}")]
 	public class ProfileController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;

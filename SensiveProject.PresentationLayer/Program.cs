@@ -26,33 +26,6 @@ builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Sensiv
 builder.Services.AddControllersWithViews().AddFluentValidation();
 builder.Services.ContainerDependencies();
 
-//builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
-//builder.Services.AddScoped<ICategoryService, CategoryManager>();
-
-//builder.Services.AddScoped<IArticleDal,EfArticleDal>();
-//builder.Services.AddScoped<IArticleService,ArticleManager>();
-
-//builder.Services.AddScoped<ICommentDal,EfCommentDal>();
-//builder.Services.AddScoped<ICommentService,CommentManager>();
-
-//builder.Services.AddScoped<IContactDal,EfContactDal>();
-//builder.Services.AddScoped<IContactService,ContactManager>();
-
-//builder.Services.AddScoped<IContactInfoDal, EfContactInfoDal>();
-//builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
-
-
-//builder.Services.AddScoped<INewsletterDal, EfNewsletterDal>();
-//builder.Services.AddScoped<INewsletterService, NewsletterManager>();
-
-//builder.Services.AddScoped<ITagCloudDal, EfTagCloudDal>();
-//builder.Services.AddScoped<ITagCloudService, TagCloudManager>();
-
-//builder.Services.AddScoped<IAppUserDal, EfAppUserDal>();
-//builder.Services.AddScoped<IAppUserService, AppUserManager>();
-
-//builder.Services.AddScoped<IArticleTagCloudDal, EfArticleTagCloudDal>();
-//builder.Services.AddScoped<IArticleTagCloudService, ArticleTagCloudManager>();
 
 builder.Services.AddControllersWithViews();
 

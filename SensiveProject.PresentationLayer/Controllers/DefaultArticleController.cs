@@ -28,6 +28,8 @@ namespace SensiveProject.PresentationLayer.Controllers
 		public async Task<IActionResult> ArticleDetail(int id)
 		{
 			ViewData["PageTitle"] = "Blog Detayı";
+			ViewBag.i = id;
+
 			// Giriş yapmış kullanıcı var mı?
 			var currentUser = User.Identity.IsAuthenticated ? await _userManager.FindByNameAsync(User.Identity.Name) : null;
 
@@ -76,5 +78,35 @@ namespace SensiveProject.PresentationLayer.Controllers
 			return View(currentArticle);
 		}
 
+		[HttpGet]
+		public PartialViewResult AddComment()
+		{
+			return PartialView();
+		}
+
+		[HttpPost]
+		public IActionResult AddComment(Comment comment)
+		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				// Kullanıcı giriş yapmamışsa, kayıt veya giriş sayfasına yönlendir
+				return RedirectToAction("Index", "Login"); // "Hesap" controller'ında "KayitOl" action'ına yönlendir
+			}
+
+			comment.CreatedDate = DateTime.Now;
+				comment.Status = true;
+
+			// ArticleId doğruluğunu kontrol et
+			var article = _articleService.TGetById(comment.ArticleId);
+
+			if (article == null)
+			{
+				return NotFound("İlgili makale bulunamadı.");
+			}
+
+			_commentService.TInsert(comment);
+
+			return RedirectToAction("ArticleDetail", new { id = comment.ArticleId });
+		}
 	}
 }

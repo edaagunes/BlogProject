@@ -24,12 +24,19 @@ namespace SensiveProject.PresentationLayer.Controllers
 			var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, true);
 			if (result.Succeeded)
 			{
-				return RedirectToAction("Index", "Category");
+				return RedirectToAction("HomePage", "Default");
 			}
 			else
 			{
 				return View();
 			}
 		}
+
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync(); // Kullanıcı oturumunu kapat
+			return RedirectToAction("Index", "Login"); // Login sayfasına yönlendir
+		}
+
 	}
 }

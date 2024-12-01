@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SensiveProject.BusinessLayer.Abstract;
 using SensiveProject.EntityLayer.Concrete;
 
 namespace SensiveProject.PresentationLayer.Controllers
 {
+	[AllowAnonymous]
 	public class DefaultController : Controller
 	{
 		private readonly IArticleService _articleService;

@@ -7,7 +7,7 @@ using SensiveProject.PresentationLayer.Models;
 
 namespace SensiveProject.PresentationLayer.Controllers
 {
-
+	[AllowAnonymous]
 	public class DefaultArticleController : Controller
 	{
 		private readonly IArticleService _articleService;
@@ -23,21 +23,20 @@ namespace SensiveProject.PresentationLayer.Controllers
 			_articleTagCloudService = articleTagCloudService;
 		}
 
-		[AllowAnonymous]
+
+	
 		public async Task<IActionResult> ArticleDetail(int id)
 		{
 			ViewData["PageTitle"] = "Blog Detayı";
+			// Giriş yapmış kullanıcı var mı?
+			var currentUser = User.Identity.IsAuthenticated ? await _userManager.FindByNameAsync(User.Identity.Name) : null;
 
-			// Giriş yapan kullanıcı bilgisi
-			if (User.Identity.IsAuthenticated)
+			// Giriş yapan kullanıcı varsa, bilgilerini ViewBag'e ekleyin.
+			if (currentUser != null)
 			{
-				var user = await _userManager.FindByNameAsync(User.Identity.Name);
-				ViewBag.userId = user.Id;
+				ViewBag.userId = currentUser.Id;
 			}
-			else
-			{
-				ViewBag.userId = null;
-			}
+
 
 			// Geçerli blog detayını al
 			var currentArticle = _articleService.TGetById(id);
@@ -47,6 +46,7 @@ namespace SensiveProject.PresentationLayer.Controllers
 			{
 				ViewBag.AuthorName = $"{currentArticle.AppUser.Name} {currentArticle.AppUser.Surname}";
 				ViewBag.AuthorImage = currentArticle.AppUser.ImageUrl;
+				ViewBag.AuthorDetail = currentArticle.AppUser.DetailAuthor;
 			}
 
 			// Blogun yorumlarını ekle

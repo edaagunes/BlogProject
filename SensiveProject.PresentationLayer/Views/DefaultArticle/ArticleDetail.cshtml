@@ -12,7 +12,7 @@
 
 			<div class="col-lg-8">
 				<div class="main_blog_details">
-					<img class="img-fluid" src="@Model.CoverImageUrl" alt="">
+					<img class="img-fluid" src="@Model.CoverImageUrl" style="width:750px;height:400px" alt="">
 					<a href="#"><h4>@Model.Title</h4></a>
 					<div class="user_details">
 
@@ -56,7 +56,14 @@
 								var firstUser = Model.Comments.First().AppUser;
 								var remainingCount = Model.Comments.Count() - 1;
 
-								@($"{firstUser.Name} {firstUser.Surname} ve {(remainingCount > 0 ? $"{remainingCount} kişi" : "hiç kimse")} beğendi.")
+								if (remainingCount == 0)
+								{
+									@($"{firstUser.Name} {firstUser.Surname} beğendi.")
+								}
+								else
+								{
+									@($"{firstUser.Name} {firstUser.Surname} ve {remainingCount} kişi beğendi.")
+								}
 							}
 							else
 							{
@@ -75,6 +82,7 @@
 								<span>0</span>
 							} Yorum
 						</a>
+
 						<div class="news_socail ml-sm-auto mt-sm-0 mt-2">
 							<a href="#"><i class="fab fa-facebook-f"></i></a>
 							<a href="#"><i class="fab fa-twitter"></i></a>
@@ -82,6 +90,7 @@
 							<a href="#"><i class="fab fa-behance"></i></a>
 						</div>
 					</div>
+
 				</div>
 
 				<!--Pagination-->
@@ -136,13 +145,28 @@
 					</div>
 				</div>
 
+				<!-- Author Details Section -->
+				<div class="author-details mb-5" style="margin-top:10px;">
+					<div class="media">
+						@if (ViewBag.AuthorName != null)
+						{
+							<div class="d-flex">
+								<img src="@ViewBag.AuthorImage" alt="Author Image" class="rounded-circle" style="width: 80px; height: 80px;">
+							</div>
+							<div class="media-body ml-3">
+								<h4 class="mb-2">@ViewBag.AuthorName</h4>
+								<p>@ViewBag.AuthorDetail</p>
+							</div>
+						}
+					</div>
+				</div>
 
 				<!--Comment List-->
 				<div class="comments-area">
 					<h4>Yorumlar</h4>
-					
-						@foreach (var item in Model.Comments)
-						{
+
+					@foreach (var item in Model.Comments)
+					{
 						<div class="comment-list">
 							<div class="single-comment justify-content-between d-flex">
 								<div class="user justify-content-between d-flex">
@@ -156,13 +180,12 @@
 											@item.Detail
 										</p>
 									</div>
-								</div>								
+								</div>
 							</div>
 						</div>
-						}
-						
-					
+					}
 				</div>
+
 
 				<!--Add Comment-->
 				<div class="comment-form">

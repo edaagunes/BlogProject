@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using SensiveProject.BusinessLayer.Abstract;
 using SensiveProject.BusinessLayer.Concrete;
 using SensiveProject.DataAccessLayer.Abstract;
@@ -17,6 +18,9 @@ namespace SensiveProject.BusinessLayer.Container
 	{
 		public static void ContainerDependencies(this IServiceCollection services)
 		{
+			services.AddLocalization(options => options.ResourcesPath = "Resources");
+			services.AddMvc().AddFluentValidation();
+
 			services.AddScoped<ICategoryDal,EfCategoryDal>();
 			services.AddScoped<ICategoryService,CategoryManager>();
 

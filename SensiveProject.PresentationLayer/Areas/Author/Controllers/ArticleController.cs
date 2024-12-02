@@ -1,10 +1,13 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SensiveProject.BusinessLayer.Abstract;
-using SensiveProject.BusinessLayer.ValidationRules.ArticleValidation;
+using SensiveProject.BusinessLayer.ValidationRules.CategoryValidation;
 using SensiveProject.EntityLayer.Concrete;
+using SensiveProject.PresentationLayer.Areas.Author.Models;
 
 namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 {
@@ -16,7 +19,7 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 		private readonly UserManager<AppUser> _userManager;
 		private readonly ICategoryService _categoryService;
 
-
+		
 		public ArticleController(IArticleService articleService, UserManager<AppUser> userManager, ICategoryService categoryService)
 		{
 			_articleService = articleService;
@@ -36,39 +39,42 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 		{
 			var categoryList = _categoryService.TGetAll();
 
-			// Category listesi, DropDownList için uygun SelectListItem formatına dönüştürülüyor.
-			List<SelectListItem> categoryItems = categoryList.Select(x => new SelectListItem
+			var model = new ArticleCategoryViewModel
 			{
-				Text = x.CategoryName,
-				Value = x.CategoryId.ToString() // SelectListItem Value özelliği string olduğu için ToString() kullanıyoruz.
-			}).ToList();
+				Article = new Article(),
+				Category = new Category(),
+				CategoryList = categoryList.Select(x => new SelectListItem
+				{
+					Text = x.CategoryName,
+					Value = x.CategoryId.ToString()
+				}).ToList()
+			};
 
-			ViewBag.CategoryList = categoryItems; // ViewBag ile kategori listesini gönderiyoruz
-			return View();
+			model.CategoryList.Insert(0, new SelectListItem { Text = "Kategori seçiniz", Value = "" });
+			return View(model);
 		}
 
 
 		[HttpPost]
-		public async Task<IActionResult> CreateArticle(Article article)
+		public async Task<IActionResult> CreateArticle(ArticleCategoryViewModel model)
 		{
+			if (model.Article == null)
+			{
+				ModelState.AddModelError("", "Article is null");
+				return View(model);
+			}
 			// Giriş yapan kullanıcıyı alıyoruz
 			var userValue = await _userManager.FindByNameAsync(User.Identity.Name);
 
-			if (userValue == null)
-			{
-				ModelState.AddModelError("", "Kullanıcı bulunamadı.");
-				return View(article);
-			}
-
-			article.AppUserId = userValue.Id;
-			article.CreatedDate = DateTime.Now;
+			model.Article.AppUserId = userValue.Id;
+			model.Article.CreatedDate = DateTime.Now;
 
 			CreateArticleValidator validationRules = new CreateArticleValidator();
-			ValidationResult result = validationRules.Validate(article);
+			ValidationResult result = validationRules.Validate(model.Article);
 
 			if (result.IsValid)
 			{
-				_articleService.TInsert(article);
+				_articleService.TInsert(model.Article);				
 				return RedirectToAction("MyArticleList");
 			}
 			else
@@ -79,20 +85,17 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 				}
 			}
 
-			// ViewBag.CategoryList'i yeniden dolduruyoruz
+			// Kategori listesini yeniden doldur
 			var categoryList = _categoryService.TGetAll();
-			List<SelectListItem> categoryItems = categoryList.Select(x => new SelectListItem
+			model.CategoryList = categoryList.Select(x => new SelectListItem
 			{
 				Text = x.CategoryName,
 				Value = x.CategoryId.ToString()
 			}).ToList();
+			model.CategoryList.Insert(0, new SelectListItem { Text = "Kategori seçiniz", Value = "" });
 
-			ViewBag.CategoryList = categoryItems;
-
-			return View(article);
+			
+			return View(model); 
 		}
-
-
-
 	}
 }

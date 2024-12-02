@@ -1,18 +1,12 @@
 using FluentValidation.AspNetCore;
-using SensiveProject.BusinessLayer.Abstract;
-using SensiveProject.BusinessLayer.Concrete;
 using SensiveProject.BusinessLayer.Container;
-using SensiveProject.DataAccessLayer.Abstract;
+using SensiveProject.BusinessLayer.ValidationRules;
 using SensiveProject.DataAccessLayer.Context;
-using SensiveProject.DataAccessLayer.EntityFramework;
 using SensiveProject.EntityLayer.Concrete;
 using SensiveProject.PresentationLayer.Models;
-using System.Security.Principal;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
-
 
 // Generic Repository yi kullanabilmek için
 
@@ -23,11 +17,17 @@ builder.Services.AddDbContext<SensiveContext>();
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SensiveContext>().AddErrorDescriber<CustomIdentityValidator>();
 
+
 builder.Services.AddControllersWithViews().AddFluentValidation();
 builder.Services.ContainerDependencies();
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+// FluentValidation için localization desteði ekleyin
+builder.Services.AddFluentValidation(fv => fv.LocalizationEnabled = true);
+
+builder.Services.AddControllersWithViews().AddDataAnnotationsLocalization()
+		.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateArticleValidator>()); ;
 
 var app = builder.Build();
 
@@ -59,5 +59,17 @@ app.UseEndpoints(endpoints =>
 	  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 	);
 });
+
+var supportedCultures = new[] { new CultureInfo("tr-TR"), new CultureInfo("en-US") };
+// Yerelleþtirme middleware'ini ekleyin
+app.UseRequestLocalization(options =>
+{
+	var supportedCultures = new[] { "tr", "en" };
+	options.AddSupportedCultures(supportedCultures)
+		   .AddSupportedUICultures(supportedCultures)
+		   .SetDefaultCulture("tr"); // Türkçe olarak ayarladýk
+});
+
+app.MapControllers();
 
 app.Run();

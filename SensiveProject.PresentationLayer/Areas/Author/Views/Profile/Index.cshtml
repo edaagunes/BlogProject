@@ -3,20 +3,16 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AuthorLayout.cshtml";
 }
+<style>
+
+</style>
 
 <div class="midde_cont">
     <div class="container-fluid">
-        <div class="row column_title">
-            <div class="col-md-12">
-                <div class="page_title">
-                    <h2>Profilim</h2>
-                </div>
-            </div>
-        </div>
         <!-- row -->
         <div class="row column1">
             <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="white_shd full margin_bottom_30">
                     <div class="full graph_head">
                         <div class="heading1 margin_0">
@@ -24,6 +20,7 @@
                         </div>
                     </div>
                     <div class="full price_table padding_infor_info">
+                        <form method="post" enctype="multipart/form-data">
                         <div class="row">
                             <!-- user profile section -->
                             <!-- profile image -->
@@ -35,11 +32,18 @@
                                     <div class="profile_contant">
                                         <div class="contact_inner">
                                             <h3>@Model.Name @Model.Surname</h3>
-                                            <p><strong>Kullanıcı Adınız: </strong>@Model.Username</p>
+                                            <p><strong>Kullanıcı Adınız: </strong> @Model.Username</p>
                                             <ul class="list-unstyled">
                                                 <li><i class="fa fa-envelope-o"></i> : @Model.Email</li>                                               
                                             </ul>
-                                        </div>                                    
+                                        </div>
+                                 
+                                            <div class="contact_inner" style="margin-top: 20px !important;">
+                                                <p><strong>Yazar Detayı</strong></p>
+                                                <textarea rows="4" cols="3" asp-for="AuthorDetail" class="form-control" required></textarea>
+                                          
+                                            </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- profile contant section -->
@@ -54,7 +58,7 @@
                                             <div class="tab-content" id="nav-tabContent">
                                                 <div class="tab-pane fade show active" id="recent_activity" role="tabpanel" aria-labelledby="nav-home-tab">
                                                     <div class="msg_list_main">
-                                                        <form method="post" enctype="multipart/form-data">
+                                                      
                                                             <div class="container">
                                                                 <label>Adınız</label>
                                                                 <input type="text" asp-for="Name" class="form-control" required />
@@ -78,7 +82,7 @@
                                                                 </div>
                                                                 <button class="btn btn-info">Profili Güncelle</button>
                                                             </div>
-                                                        </form>
+                                                       
                                                     </div>
                                                 </div>
  
@@ -88,7 +92,9 @@
                                 </div>
                                 <!-- end user profile section -->
                             </div>
+                            
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

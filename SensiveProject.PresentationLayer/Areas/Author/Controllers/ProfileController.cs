@@ -31,6 +31,7 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 			model.Name = user.Name;
 			model.Username = user.UserName;
 			model.ImageUrl = user.ImageUrl;
+			model.AuthorDetail = user.DetailAuthor;
 
 			return View(model);
 		}
@@ -44,6 +45,7 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 			user.Name = model.Name;
 			user.Email = model.Email;
 			user.UserName = model.Username;
+			user.DetailAuthor = model.AuthorDetail;
 
 			if (model.Image != null)
 			{

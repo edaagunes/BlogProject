@@ -97,5 +97,18 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 			
 			return View(model); 
 		}
+
+		public IActionResult DeleteArticle(int id)
+		{
+			_articleService.TDelete(id);
+			return RedirectToAction("MyArticleList");
+		}
+
+		public IActionResult DetailArticle(int id)
+		{
+			ViewBag.id = id;
+			var value = _articleService.TGetByIdWithCategory(id);
+			return View(value);
+		}
 	}
 }

@@ -49,6 +49,11 @@ namespace SensiveProject.BusinessLayer.Concrete
 			return _articleDal.GetById(id);
 		}
 
+		public Article TGetByIdWithCategory(int id)
+		{
+			return _articleDal.GetByIdWithCategory(id);
+		}
+
 		public Article TGetLastArticle()
 		{
 			return _articleDal.GetLastArticle();

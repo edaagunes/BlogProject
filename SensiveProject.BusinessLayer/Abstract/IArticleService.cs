@@ -13,6 +13,6 @@ namespace SensiveProject.BusinessLayer.Abstract
         List<Article> TArticleListWithCategoryAndAppUser();
 		public Article TGetLastArticle();
 		List<Article> TGetArticlesByAppUserId(int id);
-
+		public Article TGetByIdWithCategory(int id);
 	}
 }

@@ -23,8 +23,6 @@ namespace SensiveProject.PresentationLayer.Controllers
 			_articleTagCloudService = articleTagCloudService;
 		}
 
-
-	
 		public async Task<IActionResult> ArticleDetail(int id)
 		{
 			ViewData["PageTitle"] = "Blog Detayı";

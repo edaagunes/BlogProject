@@ -45,5 +45,12 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
             var value=context.Articles.OrderByDescending(x=>x.ArticleId).Take(1).FirstOrDefault();
             return value;
 		}
+
+        public Article GetByIdWithCategory(int id)
+        {
+            var context = new SensiveContext();
+            var values=context.Articles.Where(x=>x.ArticleId==id).Include(x=>x.Category).FirstOrDefault();
+            return values;
+        }
 	}
 }

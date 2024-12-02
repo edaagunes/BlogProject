@@ -140,26 +140,38 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 		}
 
 		[HttpPost]
-		public async  Task<IActionResult> EditArticle(ArticleCategoryViewModel model)
+		public async Task<IActionResult> EditArticle(ArticleCategoryViewModel model)
 		{
 			if (model.Article == null)
 			{
 				ModelState.AddModelError("", "Article is null");
 				return View(model);
 			}
-			// Giriş yapan kullanıcıyı alıyoruz
+
+			// Mevcut makaleyi kontrol et
+			var existingArticle = _articleService.TGetById(model.Article.ArticleId);
+			if (existingArticle == null)
+			{
+				return NotFound(); // Eğer makale bulunamazsa hata döndür
+			}
+
+			// Giriş yapan kullanıcıyı al
 			var userValue = await _userManager.FindByNameAsync(User.Identity.Name);
 
-			model.Article.AppUserId = userValue.Id;
-			model.Article.CreatedDate = DateTime.Now;
+			// Mevcut makale üzerinde değişiklik yap
+			existingArticle.Title = model.Article.Title;
+			existingArticle.Description = model.Article.Description;
+			existingArticle.CategoryId = model.Article.CategoryId;
+			existingArticle.CreatedDate = DateTime.Now;
 
+			// Doğrulama işlemi
 			CreateArticleValidator validationRules = new CreateArticleValidator();
-			ValidationResult result = validationRules.Validate(model.Article);
+			ValidationResult result = validationRules.Validate(existingArticle);
 
 			if (result.IsValid)
 			{
-				_articleService.TUpdate(model.Article);
-				return RedirectToAction("MyArticleList");
+				_articleService.TUpdate(existingArticle); // Sadece güncelle
+				return RedirectToAction("MyArticleList","Article");
 			}
 			else
 			{
@@ -178,9 +190,8 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 			}).ToList();
 			model.CategoryList.Insert(0, new SelectListItem { Text = "Kategori seçiniz", Value = "" });
 
-			_categoryService.TUpdate(model.Category);
-
 			return View(model);
 		}
+
 	}
 }

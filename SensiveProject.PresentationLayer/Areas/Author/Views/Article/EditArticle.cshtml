@@ -24,6 +24,7 @@
 											</nav>
 
 											<form method="post" asp-action="EditArticle" asp-controller="Article">
+												<input type="hidden" asp-for="Article.ArticleId"/>
 												<div class="tab-content" id="nav-tabContent">
 													<div class="tab-pane fade show active" id="recent_activity" role="tabpanel" aria-labelledby="nav-home-tab">
 														<div class="msg_list_main">

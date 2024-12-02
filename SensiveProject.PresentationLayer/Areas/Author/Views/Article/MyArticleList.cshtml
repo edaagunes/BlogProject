@@ -42,18 +42,32 @@
         display: flex;
         align-items: center;
     }
+
+    .graph_head {
+        display: flex;
+        align-items: center; /* Dikeyde ortalama */
+        justify-content: space-between; /* Elemanlar arasında boşluk bırak */
+        padding: 10px; /* İhtiyaca göre padding ayarı */
+    }
+
+    .custom-button {
+        padding: 10px 20px; /* Butonun iç boşluğunu artırır */
+        font-size: 16px; /* Yazı boyutunu artırır */
+        border-radius: 8px; /* Kenarları hafif yuvarlak yapar */
+        font-weight: bold; /* Yazıyı kalınlaştırır */
+    }
+
 </style>
-
-
-
 
 <div class="col-md-12">
     <div class="white_shd full margin_bottom_30">
-        <div class="full graph_head">
+        <div class="full graph_head d-flex align-items-center justify-content-between">
             <div class="heading1 margin_0">
                 <h2>Blog Yazılarım</h2>
             </div>
+            <a href="/Author/Article/CreateArticle/" class="btn cur-p btn-success custom-button" style="margin-right:70px;">Yeni Yazı Ekle</a>
         </div>
+
         <div class="full progress_bar_inner">
             <div class="row">
                 <div class="col-md-12">
@@ -65,7 +79,7 @@
                                     <!-- Sol kısım: Başlık, açıklama ve tarih -->
                                     <div class="left_section">
                                         <span class="name_user">@item.Title - @item.Category.CategoryName</span>
-                                        <span class="msg_user">@item.Description.Substring(0, 100)...</span>
+                                        <span class="msg_user">@item.Description.Substring(0, 10)...</span>
                                         <span class="time_ago">@item.CreatedDate.ToString("dd-MMM-yyyy")</span>
                                     </div>
 

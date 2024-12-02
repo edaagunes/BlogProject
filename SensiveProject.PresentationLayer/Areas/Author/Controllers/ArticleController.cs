@@ -110,5 +110,77 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 			var value = _articleService.TGetByIdWithCategory(id);
 			return View(value);
 		}
+
+		[HttpGet]
+		public IActionResult EditArticle(int id)
+		{
+			var article = _articleService.TGetByIdWithCategory(id); // Mevcut makaleyi getir
+
+			if (article == null)
+			{
+				return NotFound(); // Eğer makale bulunamazsa hata döndür
+			}
+
+			var categoryList = _categoryService.TGetAll();
+
+			var model = new ArticleCategoryViewModel
+			{
+				Article = article,
+				CategoryList = categoryList.Select(x => new SelectListItem
+				{
+					Text = x.CategoryName,
+					Value = x.CategoryId.ToString(),
+					Selected = x.CategoryId == article.CategoryId // Seçili kategori ayarı
+				}).ToList()
+			};
+
+			model.CategoryList.Insert(0, new SelectListItem { Text = "Kategori seçiniz", Value = "" });
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public async  Task<IActionResult> EditArticle(ArticleCategoryViewModel model)
+		{
+			if (model.Article == null)
+			{
+				ModelState.AddModelError("", "Article is null");
+				return View(model);
+			}
+			// Giriş yapan kullanıcıyı alıyoruz
+			var userValue = await _userManager.FindByNameAsync(User.Identity.Name);
+
+			model.Article.AppUserId = userValue.Id;
+			model.Article.CreatedDate = DateTime.Now;
+
+			CreateArticleValidator validationRules = new CreateArticleValidator();
+			ValidationResult result = validationRules.Validate(model.Article);
+
+			if (result.IsValid)
+			{
+				_articleService.TUpdate(model.Article);
+				return RedirectToAction("MyArticleList");
+			}
+			else
+			{
+				foreach (var item in result.Errors)
+				{
+					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+				}
+			}
+
+			// Kategori listesini yeniden doldur
+			var categoryList = _categoryService.TGetAll();
+			model.CategoryList = categoryList.Select(x => new SelectListItem
+			{
+				Text = x.CategoryName,
+				Value = x.CategoryId.ToString()
+			}).ToList();
+			model.CategoryList.Insert(0, new SelectListItem { Text = "Kategori seçiniz", Value = "" });
+
+			_categoryService.TUpdate(model.Category);
+
+			return View(model);
+		}
 	}
 }

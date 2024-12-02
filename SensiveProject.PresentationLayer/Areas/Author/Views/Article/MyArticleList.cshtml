@@ -1,47 +1,92 @@
 ﻿@model List<Article>
 @{
-    Layout = null;
+    ViewData["Title"] = "MyArticleList";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makale Listesi</title>
-    <link rel="stylesheet" href="~/css/Article.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Kategoriler</h2>
-            <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Profilim</a></li>
-                <li><a href="/Author/Article/MyArticleList/">Yazılarım</a></li>
-                <li><a href="#">Yorumlarım</a></li>
-                <li><a href="#">Siteye Git</a></li>
-                <li><a href="#">Çıkış Yap</a></li>
-            </ul>
-        </aside>
+<style>
+    .msg_list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
 
-        <!-- Main Content -->
-        <main class="content">
-            <h1>Kullanıcı Makaleleri</h1>
-            <div class="article-list">
-                @foreach (var item in Model)
-                {
-                    <div class="article">
-                        <h3>@item.Title</h3>
-                        <p><strong>Tarih:</strong> @item.CreatedDate.ToString("dd-MMM-yyyy")</p>
-                        <a href="btn btn-primary">Yazıyı Düzenle</a>
-                    </div>
-                }
-               
-               
+        /* Sol taraf: Başlık, açıklama ve tarih */
+        .msg_list li .left_section {
+            display: flex;
+            flex-direction: column; /* Öğeleri dikey hizalar */
+            flex-grow: 3;
+        }
+
+        .msg_list li .name_user {
+            font-weight: bold;
+            margin-bottom: 5px; /* Başlık ve açıklama arasında boşluk */
+        }
+
+        .msg_list li .msg_user {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 5px; /* Açıklama ve tarih arasında boşluk */
+        }
+
+        .msg_list li .time_ago {
+            font-size: 12px;
+            color: #888;
+        }
+
+    /* Sağ taraf: Dropdown menü */
+    .dropdown_section {
+        margin-left: 10px;
+        margin-right:50px;
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+
+
+
+<div class="col-md-12">
+    <div class="white_shd full margin_bottom_30">
+        <div class="full graph_head">
+            <div class="heading1 margin_0">
+                <h2>Blog Yazılarım</h2>
             </div>
-        </main>
+        </div>
+        <div class="full progress_bar_inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="msg_list_main">
+                        <ul class="msg_list">
+                            @foreach (var item in Model)
+                            {
+                                <li>
+                                    <!-- Sol kısım: Başlık, açıklama ve tarih -->
+                                    <div class="left_section">
+                                        <span class="name_user">@item.Title - @item.Category.CategoryName</span>
+                                        <span class="msg_user">@item.Description.Substring(0, 100)...</span>
+                                        <span class="time_ago">@item.CreatedDate.ToString("dd-MMM-yyyy")</span>
+                                    </div>
+
+                                    <!-- Sağ kısım: Dropdown menü -->
+                                    <span class="dropdown_section">
+                                        <div class="dropdown dropleft">
+                                            <button type="button" class="btn cur-p btn-outline-info dropdown-toggle" data-toggle="dropdown">Düzenle</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Görüntüle</a>
+                                                <a class="dropdown-item" href="#">Güncelle</a>
+                                                <a class="dropdown-item" href="#">Sil</a>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</div>

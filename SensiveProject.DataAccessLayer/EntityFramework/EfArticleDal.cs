@@ -35,7 +35,7 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
 		public List<Article> GetArticlesByAppUserId(int id)
 		{
 			var context = new SensiveContext();
-            var values=context.Articles.Where(x=>x.AppUserId==id).ToList();
+            var values=context.Articles.Where(x=>x.AppUserId==id).Include(x=>x.Category).ToList();
             return values;
 		}
 

@@ -54,8 +54,8 @@ $(function() {
         dots: false,
         responsiveClass: true,
         navText: [
-            "<div class='blog-slider__leftArrow'><img src='~/img/home/left-arrow.png'></div>",
-            "<div class='blog-slider__rightArrow'><img src='~/img/home/right-arrow.png'></div>"
+            "<div class='blog-slider__leftArrow'><img src='/sensive-master/img/home/left-arrow.png'></div>",
+            "<div class='blog-slider__rightArrow'><img src='/sensive-master/img/home/right-arrow.png'></div>"
         ],
 
         responsive:{

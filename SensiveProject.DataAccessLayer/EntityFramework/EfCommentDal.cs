@@ -23,5 +23,25 @@ namespace SensiveProject.DataAccessLayer.EntityFramework
 			var values=context.Comments.Where(x=>x.ArticleId==id).Include(y=>y.Article).Include(z=>z.AppUser).ToList();
 			return values;
 		}
+
+		public List<Comment> GetCommentsByAppUserId(int id)
+		{
+			var context=new SensiveContext();
+			var values = context.Comments.Where(x => x.AppUserId == id).Include(x => x.Article).ToList();
+			return values;
+		}
+
+		public Comment GetCommentById(int commentId, int userId)
+		{
+			using (var context = new SensiveContext())
+			{
+				// Yorum ID'si ve kullanıcı ID'si eşleşen veriyi getiriyoruz
+				var comment = context.Comments
+					.Where(x => x.CommentId == commentId && x.AppUserId == userId) // Yorum ID ve kullanıcı kontrolü
+					.Include(x => x.Article) // İlgili makale başlığını yüklemek için
+					.FirstOrDefault();
+				return comment;
+			}
+		}
 	}
 }

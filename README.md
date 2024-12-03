@@ -66,7 +66,7 @@
 
 ### 📂 Veri Tabanı İlişkileri
 
-![db](https://github.com/user-attachments/assets/58f7ce42-379f-473a-b6e1-786858a06bf4)
+![db](https://github.com/user-attachments/assets/40602b5e-a891-48d0-93c3-199fc425691a)
 
 ### 🌟 Web Site
 ![home](https://github.com/user-attachments/assets/4524a631-1c25-46e1-9d5b-0cc86a7601b9)

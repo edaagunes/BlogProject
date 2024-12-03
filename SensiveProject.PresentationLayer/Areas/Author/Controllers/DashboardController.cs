@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SensiveProject.BusinessLayer.Abstract;
 using SensiveProject.EntityLayer.Concrete;
 
 namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
@@ -9,10 +10,16 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 	public class DashboardController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;
+		private readonly IAppUserService _appUserService;
+		private readonly IArticleService _articleService;
+		private readonly ICommentService _commentService;
 
-		public DashboardController(UserManager<AppUser> userManager)
+		public DashboardController(UserManager<AppUser> userManager, IAppUserService appUserService, IArticleService articleService, ICommentService commentService)
 		{
 			_userManager = userManager;
+			_appUserService = appUserService;
+			_articleService = articleService;
+			_commentService = commentService;
 		}
 
 		public async Task<IActionResult> Index()
@@ -28,7 +35,13 @@ namespace SensiveProject.PresentationLayer.Areas.Author.Controllers
 				ViewBag.AuthorImage = currentUser.ImageUrl;
 			}
 
-			return View();
+			ViewBag.userCount = _appUserService.TGetAll().Count();
+			ViewBag.articleCount = _articleService.TGetAll().Count();
+			ViewBag.commentCount = _commentService.TGetAll().Count();
+
+			var values = _articleService.TGetLastArticle();
+
+			return View(values);
 		}
 	}
 }

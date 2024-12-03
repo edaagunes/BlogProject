@@ -1,8 +1,227 @@
-﻿
+﻿@model Article
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AuthorLayout.cshtml";
 }
+<style>
+    .image{
+        border-radius: 15px;
+        overflow: hidden;
+        width: 150px;
+        height: 150px;
+    }
+</style>
 
-<h1>Index</h1>
+<div class="midde_cont">
+    <div class="container-fluid">
+        <div class="row column_title">
+            <div class="col-md-12">
+                <div class="page_title">
+                    <h2>Dashboard</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row column1">
+            <div class="col-md-6 col-lg-3">
+                <div class="full counter_section margin_bottom_30">
+                    <div class="couter_icon">
+                        <div>
+                            <i class="fa fa-user yellow_color"></i>
+                        </div>
+                    </div>
+                    <div class="counter_no">
+                        <div>
+                            <p class="total_no">@ViewBag.userCount</p>
+                            <p class="head_couter">Yazar Sayısı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="full counter_section margin_bottom_30">
+                    <div class="couter_icon">
+                        <div>
+                            <i class="fa fa-clock-o blue1_color"></i>
+                        </div>
+                    </div>
+                    <div class="counter_no">
+                        <div>
+                            <p class="total_no">23.50</p>
+                            <p class="head_couter">Ortalama Blog Okuma Süresi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="full counter_section margin_bottom_30">
+                    <div class="couter_icon">
+                        <div>
+                            <i class="fa fa-cloud-download green_color"></i>
+                        </div>
+                    </div>
+                    <div class="counter_no">
+                        <div>
+                            <p class="total_no">@ViewBag.articleCount</p>
+                            <p class="head_couter">Blog Sayısı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="full counter_section margin_bottom_30">
+                    <div class="couter_icon">
+                        <div>
+                            <i class="fa fa-comments-o red_color"></i>
+                        </div>
+                    </div>
+                    <div class="counter_no">
+                        <div>
+                            <p class="total_no">@ViewBag.commentCount</p>
+                            <p class="head_couter">Yorum Sayısı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row column1 social_media_section  justify-content-center">
+            <div class="col-md-6 col-lg-3">
+                <div class="full socile_icons fb margin_bottom_30">
+                    <div class="social_icon">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    <div class="social_cont">
+                        <ul>
+                            <li>
+                                <span><strong>5k</strong></span>
+                                <span>Takipçi</span>
+                            </li>
+                            <li>
+                                <span><strong>128</strong></span>
+                                <span>Gönderi</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="full socile_icons tw margin_bottom_30">
+                    <div class="social_icon">
+                        <i class="fa fa-twitter"></i>
+                    </div>
+                    <div class="social_cont">
+                        <ul>
+                            <li>
+                                <span><strong>4k</strong></span>
+                                <span>Takipçi</span>
+                            </li>
+                            <li>
+                                <span><strong>78</strong></span>
+                                <span>Tweet</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="full socile_icons linked margin_bottom_30">
+                    <div class="social_icon">
+                        <i class="fa fa-linkedin"></i>
+                    </div>
+                    <div class="social_cont">
+                        <ul>
+                            <li>
+                                <span><strong>758+</strong></span>
+                                <span>Bağlantı</span>
+                            </li>
+                            <li>
+                                <span><strong>65</strong></span>
+                                <span>Gönderi</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row column3">
+            <!-- testimonial -->
+            <div class="col-md-6">
+                <div class="dark_bg full margin_bottom_30">
+                    <div class="full graph_head">
+                        <div class="heading1 margin_0">
+                            <h2>Bizim İçin Ne Dediler?</h2>
+                        </div>
+                    </div>
+                    <div class="full graph_revenue">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="content testimonial">
+                                    <div id="testimonial_slider" class="carousel slide" data-ride="carousel">
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            <div class="item carousel-item active">
+                                                <div class="img-box"><img src="/pluto-1.0.0/images/layout_img/user_img.jpg" alt=""></div>
+                                                <p class="testimonial">"Sitenizdeki yorum ve etkileşim bölümleri, okuyucuların da bir topluluğun parçası olduğunu hissettiriyor. Paylaşımlara hızlı dönüş yapmanız ve okuyucularla iletişimde olmanız gerçekten harika. Böyle bir platformda vakit geçirmek çok keyifli!""</p>
+                                                <p class="overview"><b>Selim Akay</b></p>
+                                            </div>
+                                            <div class="item carousel-item">
+                                                <div class="img-box"><img src="/pluto-1.0.0/images/layout_img/msg1.png" alt=""></div>
+                                                <p class="testimonial">"Sitenizin tasarımı gerçekten harika! Hem sade hem de şık bir görünümü var. Kategorilere kolayca ulaşabiliyorum ve yazılar çok düzenli bir şekilde sunulmuş. Okuyucu dostu bir platform oluşturduğunuz için tebrik ederim!""</p>
+                                                <p class="overview"><b>Hatice Yılmaz</b></p>
+                                            </div>
+                                            <div class="item carousel-item">
+                                                <div class="img-box"><img src="/pluto-1.0.0/images/layout_img/msg2.png" alt=""></div>
+                                                <p class="testimonial">"Bu blog sitesi, her aradığımı bulabileceğim kadar zengin ve çeşitli içeriklere sahip. Özellikle Teknoloji bölümü tam anlamıyla mükemmel! Kaliteli içerikleriniz ve düzenli güncellemeleriniz için teşekkür ederim.""</p>
+                                                <p class="overview"><b>Ömer Kaya</b></p>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel controls -->
+                                        <a class="carousel-control left carousel-control-prev" href="#testimonial_slider" data-slide="prev">
+                                            <i class="fa fa-angle-left"></i>
+                                        </a>
+                                        <a class="carousel-control right carousel-control-next" href="#testimonial_slider" data-slide="next">
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end testimonial -->
+            <div class="col-md-6">
+                <div class="white_shd full margin_bottom_30" style="display: flex; flex-direction: column; min-height: 450px;">
+                    <div class="full graph_head">
+                        <div class="heading1 margin_0">
+                            <h2>Son Eklenen Blog Yazısı</h2>
+                        </div>
+                    </div>
+                    <div class="full progress_bar_inner" style="flex-grow: 1;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="carousel-inner" style="display: flex; align-items: stretch;">
+                                    <!-- Görseli ve Yazıyı Yan Yana Yerleştir -->
+                                    <div class="image" style="flex-shrink: 0; width: 50%; overflow: hidden; margin-top: 20px;">
+                                        <img src="@Model.CoverImageUrl" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="ml-3" style="flex-grow: 1; padding-left: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+                                        <p class="overview"><strong>@Model.Title</strong></p>
+                                        <p class="overview"><strong>@Model.CreatedDate.ToString("dd-MMM-yyyy")</strong></p>
+                                        <p class="testimonial">@Model.Description.Substring(0,400)...<a href="/DefaultArticle/ArticleDetail/@Model.ArticleId">Devamını Oku</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+   
+</div>
 

@@ -44,7 +44,7 @@
   </tr>
   <tr>
     <td>📚 Entity Framework kullanılmıştır.</td>
-    <td>🔨 DbFirst yaklaşımı uygulanmıştır.</td>
+    <td>🔨 Code First yaklaşımı uygulanmıştır.</td>
   </tr>
   <tr>
     <td>🏢 N Katmanlı Mimari ile oluşturuldu.</td>
